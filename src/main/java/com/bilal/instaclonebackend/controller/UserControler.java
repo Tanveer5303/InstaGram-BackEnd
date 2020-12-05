@@ -6,23 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping(path = "/api/user")
 class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @PostMapping()
-    public @ResponseBody
-    String addNewUser(User user) {
-        userRepository.save(user);
-        return "Saved";
+    public User addUser(@RequestBody User user) {
+        User save = userRepository.save(user);
+        return save;
     }
 
     @GetMapping()
-    public @ResponseBody
-    Iterable<User> getAllUsers() {
+    public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
