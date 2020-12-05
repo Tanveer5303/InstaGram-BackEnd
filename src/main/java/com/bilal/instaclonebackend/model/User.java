@@ -5,21 +5,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String name;
-    private String profilePicture;
+    private String email;
+    private String password;
 
     public User() {
     }
 
-    public User(Long id, String name, String profilePicture) {
+    public User(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
-        this.profilePicture = profilePicture;
+        this.email = email;
+        this.password = password;
     }
 
     public Long getId() {
@@ -38,11 +41,29 @@ public class User {
         this.name = name;
     }
 
-    public String getProfilePicture() {
-        return profilePicture;
+    public String getEmail() {
+        return email;
     }
 
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
