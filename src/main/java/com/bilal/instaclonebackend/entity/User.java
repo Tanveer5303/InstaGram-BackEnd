@@ -1,38 +1,38 @@
-package com.bilal.instaclonebackend.model;
+package com.bilal.instaclonebackend.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Email;
-
 
 @Entity
 public class User {
+
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer uid;
     private String name;
-    @Email
     private String email;
-    private String password;
+    private String address;
+
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String password) {
-        this.id = id;
+    public User(int uid, String name, String email, String address) {
+        this.uid = uid;
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.address = address;
     }
 
-    public Long getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getName() {
@@ -51,21 +51,23 @@ public class User {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAddress() {
+        return address;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "uid=" + uid +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
+
+
 }
