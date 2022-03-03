@@ -1,7 +1,13 @@
 package com.bilal.instaclonebackend.repository;
 
-import  com.bilal.instaclonebackend.entity.User;
+import  com.bilal.instaclonebackend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+
 }

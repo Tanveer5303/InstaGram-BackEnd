@@ -1,7 +1,9 @@
 package com.bilal.instaclonebackend.repository;
 
-import  com.bilal.instaclonebackend.entity.Comment;
+import  com.bilal.instaclonebackend.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CommentRepository extends JpaRepository<Comment, Integer> {
+@Repository
+public interface CommentRepository extends JpaRepository<Comment, Long> {
 }

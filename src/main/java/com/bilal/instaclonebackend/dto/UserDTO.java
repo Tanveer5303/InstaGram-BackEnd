@@ -1,61 +1,28 @@
 package com.bilal.instaclonebackend.dto;
 
+import com.bilal.instaclonebackend.model.Comment;
+import com.bilal.instaclonebackend.model.Post;
+import com.bilal.instaclonebackend.model.Reaction;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class UserDTO {
-
-    private Integer uid;
-    private String name;
+//add password phonenumber , email
+    private String userName;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String address;
+    private Long phoneNumber;
+    private String password;
+    private String profile_pic_url;                    //profilepic
 
-    public UserDTO() {
-    }
+    //Do we have to add foreign keys to user also?
 
-    public UserDTO(Integer uid, String name, String email, String address) {
-        this.uid = uid;
-        this.name = name;
-        this.email = email;
-        this.address = address;
-    }
 
-    public Integer getUid() {
-        return uid;
-    }
-
-    public void setUid(Integer uid) {
-        this.uid = uid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "uid=" + uid +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                '}';
-    }
 }

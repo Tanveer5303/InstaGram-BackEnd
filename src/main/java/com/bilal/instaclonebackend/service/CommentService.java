@@ -1,6 +1,7 @@
 package com.bilal.instaclonebackend.service;
 
-import  com.bilal.instaclonebackend.entity.Comment;
+import com.bilal.instaclonebackend.dto.CommentDTO;
+import  com.bilal.instaclonebackend.model.Comment;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -8,10 +9,13 @@ import java.util.List;
 @Service
 public interface CommentService {
 
-    List<Comment> getAllComments();
+    List<CommentDTO> getAllComments();
 
-    Comment addComment(Comment comment);
+    CommentDTO addComment(Comment comment);
 
-    Comment findComment(int id);
+    CommentDTO findComment(long commentId);
+
+    CommentDTO deleteComment(long commentId);
+
 
 }
