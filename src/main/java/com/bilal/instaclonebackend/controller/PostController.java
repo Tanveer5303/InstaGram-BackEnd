@@ -18,12 +18,12 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping("/addPost")
-    public ResponseEntity<PostDTO> addPost(@RequestBody Post post) {
-        return new ResponseEntity<PostDTO>(postService.addPost(post),HttpStatus.OK);
+    @PostMapping("/add")
+    public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO) {
+        return new ResponseEntity<PostDTO>(postService.addPost(postDTO),HttpStatus.OK);
     }
 
-    @GetMapping("/allPost")
+    @GetMapping("/all")
     public List<PostDTO> getAllPost() {
         return postService.getAllPost();
     }

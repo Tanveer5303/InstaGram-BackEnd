@@ -11,7 +11,7 @@ public interface CommentService {
 
     List<CommentDTO> getAllComments();
 
-    CommentDTO addComment(Comment comment);
+    CommentDTO addComment(CommentDTO commentDTO);
 
     CommentDTO findComment(long commentId);
 

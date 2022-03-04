@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReactionService {
     List<ReactionDTO> getAllReaction();
 
-    ReactionDTO addReaction(Reaction reaction);
+    ReactionDTO addReaction(ReactionDTO reactionDTO);
 
     ReactionDTO findReaction(long reactionId);
 

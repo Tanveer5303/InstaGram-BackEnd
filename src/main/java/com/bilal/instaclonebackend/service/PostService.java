@@ -11,7 +11,7 @@ public interface PostService {
 
     List<PostDTO> getAllPost();
 
-    PostDTO addPost(Post post);
+    PostDTO addPost(PostDTO postDTO);
 
     PostDTO findPost(long postId);
 

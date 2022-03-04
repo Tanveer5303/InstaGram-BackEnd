@@ -19,8 +19,8 @@ public class CommentController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<CommentDTO> addComment(@RequestBody Comment comment) {
-        return new ResponseEntity<CommentDTO>(commentService.addComment(comment), HttpStatus.OK);
+    public ResponseEntity<CommentDTO> addComment(@RequestBody CommentDTO commentDTO) {
+        return new ResponseEntity<CommentDTO>(commentService.addComment(commentDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{commentId}")

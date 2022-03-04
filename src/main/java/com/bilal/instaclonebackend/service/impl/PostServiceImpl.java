@@ -1,7 +1,9 @@
 package com.bilal.instaclonebackend.service.impl;
 
 import com.bilal.instaclonebackend.dto.PostDTO;
+import com.bilal.instaclonebackend.dto.UserDTO;
 import com.bilal.instaclonebackend.model.Post;
+import com.bilal.instaclonebackend.model.User;
 import com.bilal.instaclonebackend.repository.PostRepository;
 import com.bilal.instaclonebackend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO addPost(Post post) {
-
+    public PostDTO addPost(PostDTO postDTO) {
+        Post post = convertDTOtoEntity(postDTO);
         Post postSaved = postRepository.save(post);
 
-        PostDTO postDTO = convertEntityToDTO(postSaved);
+        PostDTO postDTOReturned = convertEntityToDTO(postSaved);
 
-        return postDTO;
+        return postDTOReturned;
     }
 
     @Override
@@ -63,9 +65,24 @@ public class PostServiceImpl implements PostService {
     private PostDTO convertEntityToDTO(Post post){
         return PostDTO.builder()
                 .username(post.getUser().getUserName())
+                .uId(post.getUser().getUId())
                 .description(post.getDescription())
                 .image_url(post.getImage_url())
                 .time(post.getTime())
+                .user(post.getUser())
+                .comments(post.getComments())
+                .reactions(post.getReactions())
+                .build();
+    }
+
+    private Post convertDTOtoEntity(PostDTO postDTO) {
+        return Post.builder()
+                .description(postDTO.getDescription())
+                .image_url(postDTO.getImage_url())
+                .time(postDTO.getTime())
+                .user(postDTO.getUser())
+                .comments(postDTO.getComments())
+                .reactions(postDTO.getReactions())
                 .build();
     }
 

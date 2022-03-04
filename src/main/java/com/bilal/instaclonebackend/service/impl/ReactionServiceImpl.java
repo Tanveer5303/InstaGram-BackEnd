@@ -1,9 +1,8 @@
 package com.bilal.instaclonebackend.service.impl;
 
+
 import com.bilal.instaclonebackend.dto.ReactionDTO;
-import com.bilal.instaclonebackend.dto.UserDTO;
 import com.bilal.instaclonebackend.model.Reaction;
-import com.bilal.instaclonebackend.model.User;
 import com.bilal.instaclonebackend.repository.ReactionRepository;
 import com.bilal.instaclonebackend.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,12 @@ public class ReactionServiceImpl implements ReactionService {
     }
 
     @Override
-    public ReactionDTO addReaction(Reaction reaction) {
+    public ReactionDTO addReaction(ReactionDTO reactionDTO) {
+        Reaction reaction = convertDTOtoEntity(reactionDTO);
         Reaction reactionSaved = reactionRepository.save(reaction);
+        ReactionDTO reactionDTOReturned = convertEntityToDTO(reactionSaved);
 
-        ReactionDTO reactionDTO = convertEntityToDTO(reactionSaved);
-
-        return reactionDTO;
+        return reactionDTOReturned;
     }
 
     @Override
@@ -62,6 +61,17 @@ public class ReactionServiceImpl implements ReactionService {
                 .PostId(reaction.getPost().getPostId())
                 .Reaction(reaction.getReaction())
                 .Time(reaction.getTime())
+                .user(reaction.getUser())
+                .post(reaction.getPost())
+                .uId(reaction.getUser().getUId())
+                .build();
+    }
+    private Reaction convertDTOtoEntity(ReactionDTO reactionDTO) {
+        return Reaction.builder()
+                .user(reactionDTO.getUser())
+                .post(reactionDTO.getPost())
+                .reaction(reactionDTO.getReaction())
+                .time(reactionDTO.getTime())
                 .build();
     }
 }

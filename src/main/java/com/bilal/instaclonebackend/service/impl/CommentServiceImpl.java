@@ -1,8 +1,10 @@
 package com.bilal.instaclonebackend.service.impl;
 
 import com.bilal.instaclonebackend.dto.CommentDTO;
+import com.bilal.instaclonebackend.dto.PostDTO;
 import com.bilal.instaclonebackend.dto.UserDTO;
 import  com.bilal.instaclonebackend.model.Comment;
+import com.bilal.instaclonebackend.model.Post;
 import com.bilal.instaclonebackend.model.User;
 import  com.bilal.instaclonebackend.repository.CommentRepository;
 import  com.bilal.instaclonebackend.service.CommentService;
@@ -27,10 +29,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDTO addComment(Comment comment) {
-
+    public CommentDTO addComment(CommentDTO commentDTO) {
+        //we dont have id at the time we receive data so we will take it in the form of DTO
+        Comment comment = convertDTOtoEntity(commentDTO);
         Comment commentSaved = commentRepository.save(comment);
-        CommentDTO commentDTO = convertEntityToDTO(commentSaved);
+        CommentDTO commentDTOReturned = convertEntityToDTO(commentSaved);
         return commentDTO;
     }
 
@@ -60,6 +63,19 @@ public class CommentServiceImpl implements CommentService {
                 .commenter(comment.getUser().getUserName())
                 .comment(comment.getComment())
                 .time(comment.getTime())
+                .uId(comment.getUser().getUId())
+                .user(comment.getUser())
+                .post(comment.getPost())
+                .PostId(comment.getPost().getPostId())
                 .build();
 }
+    private Comment convertDTOtoEntity(CommentDTO commentDTO) {
+        return Comment.builder()
+                .user(commentDTO.getUser())
+                .post(commentDTO.getPost())
+                .comment(commentDTO.getComment())
+                .time(commentDTO.getTime())
+                .build();
+    }
+
 }
