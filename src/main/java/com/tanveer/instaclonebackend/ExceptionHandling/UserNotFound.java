@@ -1,4 +1,4 @@
-package com.bilal.instaclonebackend.ExceptionHandling;
+package com.tanveer.instaclonebackend.ExceptionHandling;
 
 public class UserNotFound extends Exception{
     public UserNotFound(){

@@ -1,7 +1,7 @@
-package com.bilal.instaclonebackend.service;
+package com.tanveer.instaclonebackend.service;
 
-import com.bilal.instaclonebackend.dto.CommentDTO;
-import  com.bilal.instaclonebackend.model.Comment;
+import com.tanveer.instaclonebackend.dto.CommentDTO;
+import  com.tanveer.instaclonebackend.model.Comment;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,4 +18,5 @@ public interface CommentService {
     CommentDTO deleteComment(long commentId);
 
 
+    CommentDTO updateComment(Long commentId, CommentDTO commentDTO);
 }

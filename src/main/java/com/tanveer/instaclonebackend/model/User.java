@@ -1,4 +1,4 @@
-package com.bilal.instaclonebackend.model;
+package com.tanveer.instaclonebackend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,13 +29,13 @@ public class User {
     private String password;
     private String profile_pic_url;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE , orphanRemoval = true)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE) //removed orphanRemoval
     private List<Post> posts;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE,orphanRemoval = true)
-    private List<Comment> comments;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private List<Comment> comments ;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     private List<Reaction> reactions;
 
     }

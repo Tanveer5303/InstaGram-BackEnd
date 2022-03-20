@@ -1,7 +1,8 @@
-package com.bilal.instaclonebackend.controller;
+package com.tanveer.instaclonebackend.controller;
 
-import com.bilal.instaclonebackend.dto.ReactionDTO;
-import com.bilal.instaclonebackend.service.ReactionService;
+import com.tanveer.instaclonebackend.dto.CommentDTO;
+import com.tanveer.instaclonebackend.dto.ReactionDTO;
+import com.tanveer.instaclonebackend.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,11 @@ public class ReactionController {
     @PostMapping("/add")
     public ResponseEntity<ReactionDTO> addreaction(@RequestBody ReactionDTO reactionDTO) {
         return new ResponseEntity<ReactionDTO>(reactionService.addReaction(reactionDTO), HttpStatus.OK);
+    }
+
+    @PutMapping("/{reactionId}")
+    public ResponseEntity<ReactionDTO> updateReaction(@PathVariable Long reactionId, @RequestBody ReactionDTO reactionDTO){
+        return new ResponseEntity<ReactionDTO>(reactionService.updateReaction(reactionId,reactionDTO),HttpStatus.OK);
     }
 
     @GetMapping("/all")

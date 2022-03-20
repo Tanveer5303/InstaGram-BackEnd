@@ -1,11 +1,8 @@
-package com.bilal.instaclonebackend.controller;
+package com.tanveer.instaclonebackend.controller;
 
 
-import com.bilal.instaclonebackend.dto.UserDTO;
-import  com.bilal.instaclonebackend.model.User;
-import com.bilal.instaclonebackend.service.UserService;
-import  com.bilal.instaclonebackend.service.impl.UserServiceImpl;
-import lombok.var;
+import com.tanveer.instaclonebackend.dto.UserDTO;
+import com.tanveer.instaclonebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +27,11 @@ public class UserController {
    @DeleteMapping("/{uId}")
     public ResponseEntity<UserDTO> deleteUser(@PathVariable Long uId) {
         return new ResponseEntity<UserDTO>(userService.deleteUser(uId),HttpStatus.OK);
+    }
+
+    @PutMapping("/{uId}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long uId,@RequestBody UserDTO userDTO){
+        return new ResponseEntity<UserDTO>(userService.updateUser(uId,userDTO),HttpStatus.OK);
     }
 
     @GetMapping("/all")

@@ -1,4 +1,4 @@
-package com.bilal.instaclonebackend.model;
+package com.tanveer.instaclonebackend.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

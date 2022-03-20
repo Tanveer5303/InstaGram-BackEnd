@@ -1,13 +1,10 @@
-package com.bilal.instaclonebackend.service.impl;
+package com.tanveer.instaclonebackend.service.impl;
 
-import com.bilal.instaclonebackend.dto.UserDTO;
-import  com.bilal.instaclonebackend.model.User;
-import  com.bilal.instaclonebackend.repository.UserRepository;
-import  com.bilal.instaclonebackend.service.UserService;
-import lombok.val;
-import lombok.var;
+import com.tanveer.instaclonebackend.dto.UserDTO;
+import  com.tanveer.instaclonebackend.model.User;
+import  com.tanveer.instaclonebackend.repository.UserRepository;
+import  com.tanveer.instaclonebackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,6 +39,18 @@ public class UserServiceImpl implements UserService {
         return userDTOReturned;
     }
 
+    @Override
+    public UserDTO updateUser(Long uId, UserDTO userDTO) {
+
+         userRepository.findById(uId).orElseThrow(
+                ()-> new RuntimeException("User not found")
+        );
+        User updateUser = convertDTOtoEntity(userDTO);
+        updateUser.setUId(uId);
+        User userSaved =  userRepository.save(updateUser);
+
+        return convertEntityToDTO(userSaved);
+    }
 
 
     @Override

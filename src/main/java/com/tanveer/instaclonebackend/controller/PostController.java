@@ -1,9 +1,8 @@
-package com.bilal.instaclonebackend.controller;
+package com.tanveer.instaclonebackend.controller;
 
-import com.bilal.instaclonebackend.dto.PostDTO;
-import  com.bilal.instaclonebackend.model.Post;
-import com.bilal.instaclonebackend.service.PostService;
-import  com.bilal.instaclonebackend.service.impl.PostServiceImpl;
+import com.tanveer.instaclonebackend.dto.PostDTO;
+import com.tanveer.instaclonebackend.dto.UserDTO;
+import com.tanveer.instaclonebackend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +17,16 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping("/add")
-    public ResponseEntity<PostDTO> addPost(@RequestBody PostDTO postDTO) {
-        return new ResponseEntity<PostDTO>(postService.addPost(postDTO),HttpStatus.OK);
+    @PostMapping("/{uId}/add")
+    public ResponseEntity<PostDTO> addPost(@PathVariable Long uId,@RequestBody PostDTO postDTO) {
+        return new ResponseEntity<PostDTO>(postService.addPost(uId,postDTO),HttpStatus.OK);
     }
+
+    @PutMapping("/{postId}")
+    public ResponseEntity<PostDTO> updatePost(@PathVariable Long postId, @RequestBody PostDTO postDTO){
+        return new ResponseEntity<PostDTO>(postService.updatePost(postId,postDTO),HttpStatus.OK);
+    }
+
 
     @GetMapping("/all")
     public List<PostDTO> getAllPost() {
@@ -29,7 +34,7 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostDTO> findPost(@PathVariable int postId) {
+    public ResponseEntity<PostDTO> findPost(@PathVariable Long postId) {
         return new ResponseEntity<PostDTO>(postService.findPost(postId), HttpStatus.OK);
     }
 

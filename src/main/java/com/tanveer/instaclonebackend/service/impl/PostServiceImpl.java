@@ -1,11 +1,11 @@
-package com.bilal.instaclonebackend.service.impl;
+package com.tanveer.instaclonebackend.service.impl;
 
-import com.bilal.instaclonebackend.dto.PostDTO;
-import com.bilal.instaclonebackend.dto.UserDTO;
-import com.bilal.instaclonebackend.model.Post;
-import com.bilal.instaclonebackend.model.User;
-import com.bilal.instaclonebackend.repository.PostRepository;
-import com.bilal.instaclonebackend.service.PostService;
+import com.tanveer.instaclonebackend.dto.PostDTO;
+import com.tanveer.instaclonebackend.model.Post;
+import com.tanveer.instaclonebackend.model.User;
+import com.tanveer.instaclonebackend.repository.PostRepository;
+import com.tanveer.instaclonebackend.repository.UserRepository;
+import com.tanveer.instaclonebackend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostServiceImpl implements PostService {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private PostRepository postRepository;
@@ -28,8 +31,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO addPost(PostDTO postDTO) {
+    public PostDTO addPost(Long uId, PostDTO postDTO) {
         Post post = convertDTOtoEntity(postDTO);
+        //User user = userRepository.findById(uId).orElseThrow(
+          //      ()->new RuntimeException("user not found")
+        //);
+        //post.setUser(user);
         Post postSaved = postRepository.save(post);
 
         PostDTO postDTOReturned = convertEntityToDTO(postSaved);
@@ -59,6 +66,18 @@ public class PostServiceImpl implements PostService {
         PostDTO postDTO = convertEntityToDTO(posttobeDeleted);
 
         return postDTO;
+    }
+
+    @Override
+    public PostDTO updatePost(Long postId, PostDTO postDTO) {
+      postRepository.findById(postId).orElseThrow(
+                ()-> new RuntimeException("User not found")
+        );
+        Post updatePost = convertDTOtoEntity(postDTO);
+        updatePost.setPostId(postId);
+        Post postSaved =  postRepository.save(updatePost);
+
+        return convertEntityToDTO(postSaved);
     }
 
 

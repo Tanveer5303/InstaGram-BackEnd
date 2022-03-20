@@ -1,7 +1,7 @@
-package com.bilal.instaclonebackend.dto;
+package com.tanveer.instaclonebackend.dto;
 
-import com.bilal.instaclonebackend.model.Post;
-import com.bilal.instaclonebackend.model.User;
+import com.tanveer.instaclonebackend.model.Post;
+import com.tanveer.instaclonebackend.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

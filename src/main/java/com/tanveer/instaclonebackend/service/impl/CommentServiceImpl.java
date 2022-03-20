@@ -1,13 +1,9 @@
-package com.bilal.instaclonebackend.service.impl;
+package com.tanveer.instaclonebackend.service.impl;
 
-import com.bilal.instaclonebackend.dto.CommentDTO;
-import com.bilal.instaclonebackend.dto.PostDTO;
-import com.bilal.instaclonebackend.dto.UserDTO;
-import  com.bilal.instaclonebackend.model.Comment;
-import com.bilal.instaclonebackend.model.Post;
-import com.bilal.instaclonebackend.model.User;
-import  com.bilal.instaclonebackend.repository.CommentRepository;
-import  com.bilal.instaclonebackend.service.CommentService;
+import com.tanveer.instaclonebackend.dto.CommentDTO;
+import  com.tanveer.instaclonebackend.model.Comment;
+import  com.tanveer.instaclonebackend.repository.CommentRepository;
+import  com.tanveer.instaclonebackend.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +54,18 @@ public class CommentServiceImpl implements CommentService {
         return commentDTO;
     }
 
+    @Override
+    public CommentDTO updateComment(Long commentId, CommentDTO commentDTO) {
+        commentRepository.findById(commentId).orElseThrow(
+                ()-> new RuntimeException("Comment not found")
+        );
+        Comment updateComment = convertDTOtoEntity(commentDTO);
+        updateComment.setCommentId(commentId);
+        Comment commentSaved =  commentRepository.save(updateComment);
+
+        return convertEntityToDTO(commentSaved);
+    }
+
     private CommentDTO convertEntityToDTO(Comment comment){
         return CommentDTO.builder()
                 .commenter(comment.getUser().getUserName())
@@ -71,7 +79,7 @@ public class CommentServiceImpl implements CommentService {
 }
     private Comment convertDTOtoEntity(CommentDTO commentDTO) {
         return Comment.builder()
-                .user(commentDTO.getUser())
+               .user(commentDTO.getUser())
                 .post(commentDTO.getPost())
                 .comment(commentDTO.getComment())
                 .time(commentDTO.getTime())

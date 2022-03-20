@@ -1,6 +1,6 @@
-package com.bilal.instaclonebackend.repository;
+package com.tanveer.instaclonebackend.repository;
 
-import  com.bilal.instaclonebackend.model.Comment;
+import  com.tanveer.instaclonebackend.model.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
-package com.bilal.instaclonebackend.repository;
+package com.tanveer.instaclonebackend.repository;
 
 
-import com.bilal.instaclonebackend.model.Reaction;
+import com.tanveer.instaclonebackend.model.Reaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

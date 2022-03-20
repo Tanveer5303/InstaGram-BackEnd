@@ -1,6 +1,7 @@
-package com.bilal.instaclonebackend.controller;
+package com.tanveer.instaclonebackend.controller;
 
-import com.bilal.instaclonebackend.dto.UserDTO;
+import com.tanveer.instaclonebackend.dto.PostDTO;
+import com.tanveer.instaclonebackend.dto.UserDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,4 +14,6 @@ public class DemoController {
     public UserDTO getDemoUser(){
         return new UserDTO();
     }
+    @GetMapping("/post")
+    public PostDTO getDemoPost(){return new PostDTO();}
 }

@@ -1,4 +1,4 @@
-package com.bilal.instaclonebackend;
+package com.tanveer.instaclonebackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,10 +1,11 @@
-package com.bilal.instaclonebackend.service.impl;
+package com.tanveer.instaclonebackend.service.impl;
 
 
-import com.bilal.instaclonebackend.dto.ReactionDTO;
-import com.bilal.instaclonebackend.model.Reaction;
-import com.bilal.instaclonebackend.repository.ReactionRepository;
-import com.bilal.instaclonebackend.service.ReactionService;
+import com.tanveer.instaclonebackend.dto.ReactionDTO;
+import com.tanveer.instaclonebackend.model.Post;
+import com.tanveer.instaclonebackend.model.Reaction;
+import com.tanveer.instaclonebackend.repository.ReactionRepository;
+import com.tanveer.instaclonebackend.service.ReactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,18 @@ public class ReactionServiceImpl implements ReactionService {
         ReactionDTO reactionDTO = convertEntityToDTO(reactiontobeDeleted);
 
         return reactionDTO;
+    }
+
+    @Override
+    public ReactionDTO updateReaction(Long reactionId, ReactionDTO reactionDTO) {
+        reactionRepository.findById(reactionId).orElseThrow(
+                ()-> new RuntimeException("reaction not found")
+        );
+        Reaction updateReaction = convertDTOtoEntity(reactionDTO);
+        updateReaction.setReactionId(reactionId);
+        Reaction reactionSaved =  reactionRepository.save(updateReaction);
+
+        return convertEntityToDTO(reactionSaved);
     }
 
     private ReactionDTO convertEntityToDTO(Reaction reaction){
