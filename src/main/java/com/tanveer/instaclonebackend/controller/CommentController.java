@@ -17,14 +17,19 @@ public class CommentController {
     private CommentService commentService;
 
 
-    @PostMapping("/add")
-    public ResponseEntity<CommentDTO> addComment(@RequestBody CommentDTO commentDTO) {
-        return new ResponseEntity<CommentDTO>(commentService.addComment(commentDTO), HttpStatus.OK);
+    @PostMapping("/add/{uId}/{postId}")
+    public ResponseEntity<CommentDTO> addComment(@PathVariable(value = "uId") Long uId,
+                                                 @PathVariable(value = "postId") Long postId,
+                                                 @RequestBody CommentDTO commentDTO){
+        return new ResponseEntity<CommentDTO>(commentService.addComment(uId,postId,commentDTO), HttpStatus.OK);
     }
 
-    @PutMapping("/{commentId}")
-    public ResponseEntity<CommentDTO> updateComment(@PathVariable Long commentId, @RequestBody CommentDTO commentDTO){
-        return new ResponseEntity<CommentDTO>(commentService.updateComment(commentId,commentDTO),HttpStatus.OK);
+    @PutMapping("{uId}/{postId}/{commentId}")
+    public ResponseEntity<CommentDTO> updateComment(@PathVariable(value = "uId") Long uId,
+                                                    @PathVariable(value = "postId")Long postId,
+                                                    @PathVariable(value = "commentId") Long commentId,
+                                                    @RequestBody CommentDTO commentDTO){
+        return new ResponseEntity<CommentDTO>(commentService.updateComment(uId,postId,commentId,commentDTO),HttpStatus.OK);
     }
 
     @DeleteMapping("/{commentId}")
@@ -32,13 +37,16 @@ public class CommentController {
         return new ResponseEntity<CommentDTO>(commentService.deleteComment(commentId),HttpStatus.OK);
     }
 
-    @GetMapping("/all")
-    public List<CommentDTO> getAllComment() {
-        return commentService.getAllComments();
+    @GetMapping("/{uId}/{postId}/all")  //we will check uId and postId exist and they are corelated
+    public List<CommentDTO> getAllComment(@PathVariable(value = "uId") Long uId,  //getting comments by postid
+                                          @PathVariable(value = "postId") Long postId) {
+        return commentService.getAllComments(uId,postId);
     }
 
-    @GetMapping("/{commentId}")
-    public ResponseEntity<CommentDTO> findComment(@PathVariable Long commentId) {
-        return new ResponseEntity<CommentDTO>(commentService.findComment(commentId),HttpStatus.OK);
+    @GetMapping("find/{uId}/{postId}/{commentId}")// we will compare the uId(Id) and postId(Id) then compare postId(Id) and commentId(Id)
+    public ResponseEntity<CommentDTO> findComment(@PathVariable(value = "uId") Long uId,
+                                                  @PathVariable(value = "postId") Long postId,
+                                                  @PathVariable(value = "commentId") Long commentId) {
+        return new ResponseEntity<CommentDTO>(commentService.findComment(uId,postId,commentId),HttpStatus.OK);
     }
 }

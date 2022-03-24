@@ -22,20 +22,23 @@ public class PostController {
         return new ResponseEntity<PostDTO>(postService.addPost(uId,postDTO),HttpStatus.OK);
     }
 
-    @PutMapping("/{postId}")
-    public ResponseEntity<PostDTO> updatePost(@PathVariable Long postId, @RequestBody PostDTO postDTO){
-        return new ResponseEntity<PostDTO>(postService.updatePost(postId,postDTO),HttpStatus.OK);
+    @PutMapping("/{uId}/{postId}")
+    public ResponseEntity<PostDTO> updatePost(@PathVariable(value ="uId" ) Long uId,
+                                              @PathVariable(value = "postId") Long postId,
+                                              @RequestBody PostDTO postDTO){
+        return new ResponseEntity<PostDTO>(postService.updatePost(uId,postId,postDTO),HttpStatus.OK);
     }
 
 
-    @GetMapping("/all")
-    public List<PostDTO> getAllPost() {
-        return postService.getAllPost();
+    @GetMapping("/all/{uId}")
+    public List<PostDTO> getAllPost(@PathVariable Long uId ) {
+        return postService.getAllPost(uId);
     }
 
-    @GetMapping("/{postId}")
-    public ResponseEntity<PostDTO> findPost(@PathVariable Long postId) {
-        return new ResponseEntity<PostDTO>(postService.findPost(postId), HttpStatus.OK);
+    @GetMapping("/{uId}/{postId}")
+    public ResponseEntity<PostDTO> findPost(@PathVariable(value = "uId")Long uId,
+                                            @PathVariable(value = "postId") Long postId) {
+        return new ResponseEntity<PostDTO>(postService.findPost(uId,postId), HttpStatus.OK);
     }
 
     @DeleteMapping("/{postId}")

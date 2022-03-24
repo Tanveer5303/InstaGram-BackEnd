@@ -2,7 +2,6 @@ package com.tanveer.instaclonebackend.service.impl;
 
 import com.tanveer.instaclonebackend.dto.PostDTO;
 import com.tanveer.instaclonebackend.model.Post;
-import com.tanveer.instaclonebackend.model.User;
 import com.tanveer.instaclonebackend.repository.PostRepository;
 import com.tanveer.instaclonebackend.repository.UserRepository;
 import com.tanveer.instaclonebackend.service.PostService;
@@ -22,7 +21,7 @@ public class PostServiceImpl implements PostService {
     private PostRepository postRepository;
 
     @Override
-    public List<PostDTO> getAllPost() {
+    public List<PostDTO> getAllPost(Long uId) {
 
         return postRepository.findAll()
                 .stream()
@@ -45,7 +44,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO findPost(long postId)
+    public PostDTO findPost(Long uId, long postId)
     {
         Post post = postRepository.findById(postId).orElseThrow(
                 ()-> new RuntimeException("Post Not Found")
@@ -69,7 +68,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public PostDTO updatePost(Long postId, PostDTO postDTO) {
+    public PostDTO updatePost(Long uId, Long postId, PostDTO postDTO) {
       postRepository.findById(postId).orElseThrow(
                 ()-> new RuntimeException("User not found")
         );

@@ -13,7 +13,7 @@ import java.time.Instant;
 @Builder
 @AllArgsConstructor
 public class CommentDTO {
-    private String commenter;            //username via user
+
     private String comment;
     private Instant time;
     private Long uId;

@@ -27,7 +27,7 @@ public class Comment {
     )
     private User user;
 
-    @ManyToOne(cascade = CascadeType.DETACH)
+    @ManyToOne(cascade = CascadeType.DETACH,fetch = FetchType.LAZY)
     @JoinColumn(
             name = "post_id",
             referencedColumnName = "postId"

@@ -8,13 +8,13 @@ import java.util.List;
 @Service
 public interface PostService {
 
-    List<PostDTO> getAllPost();
+    List<PostDTO> getAllPost(Long uId);
 
     PostDTO addPost(Long uId, PostDTO postDTO);
 
-    PostDTO findPost(long postId);
+    PostDTO findPost(Long uId, long postId);
 
     PostDTO deletePost(long postId);
 
-    PostDTO updatePost(Long postId, PostDTO postDTO);
+    PostDTO updatePost(Long uId, Long postId, PostDTO postDTO);
 }
